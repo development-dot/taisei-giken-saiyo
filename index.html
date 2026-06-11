@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Group 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    background: #fffcfc;
+    font-family: "Inter", "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+  }
+
+  /* セクションは縦に積む（各セクションを個別の解像度で構築） */
+  .sec { position: relative; width: 100%; display: block; }
+  .sec--img { display: block; width: 100%; height: auto; }     /* 単一画像セクション */
+  .sec-bg  { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  /* ===== サイト共通ヘッダー（ナビ） ===== */
+  .site-header { position: relative; width: 100%; line-height: 0; }
+  .site-header > img { display: block; width: 100%; height: auto; }
+  .site-header a { position: absolute; top: 0; height: 100%; display: block; }
+  .site-header .nav-logo      { left: 0;      width: 24.00%; }
+  .site-header .nav-shiru     { left: 23.96%; width: 10.49%; }
+  .site-header .nav-interview { left: 35.85%; width: 11.05%; }
+  .site-header .nav-rinen     { left: 47.86%; width: 10.71%; }
+  .site-header .nav-shindan   { left: 59.19%; width: 10.20%; }
+  .site-header .nav-column    { left: 70.24%; width: 10.94%; }
+
+  .layer { position: absolute; display: block; }
+  .layer img { width: 100%; height: 100%; display: block; }
+
+  /* ============ ヘッダー（862px・薄帯） ============ */
+  /* header は単一画像 */
+
+  /* ============ ヒーロー（862px）============ */
+  .hero { aspect-ratio: 862 / 397; background: #fffcfc; overflow: hidden; }
+  .person {
+    top: 0; height: 100%;
+    opacity: 0; will-change: transform, opacity;
+    animation: slideFade 7s ease-in-out infinite;
+  }
+  .person--left   { left: 0;        width: 32.947%; animation-delay: 0s;   }
+  .person--center { left: 32.831%;  width: 31.207%; animation-delay: 0.2s; }
+  .person--right  { left: 64.037%;  width: 35.963%; animation-delay: 0.4s; }
+  .heading { left: 0; top: 55.668%; width: 100%; height: 28.463%; }
+  .btn--shinsotsu  { left: 49.536%; top: 88.665%; width: 14.501%; height: 8.060%; }
+  .btn--chuto      { left: 65.777%; top: 88.665%; width: 14.733%; height: 8.312%; }
+  .btn--internship { left: 82.251%; top: 88.665%; width: 14.849%; height: 8.312%; }
+  @keyframes slideFade {
+    0%   { transform: translateX(-40%); opacity: 0; }
+    14%  { transform: translateX(0);    opacity: 1; }
+    64%  { transform: translateX(0);    opacity: 1; }
+    82%  { transform: translateX(40%);  opacity: 0; }
+    100% { transform: translateX(40%);  opacity: 0; }
+  }
+
+  /* ============ ABOUT's（高解像度 1560px）============ */
+  .about { aspect-ratio: 862 / 557; overflow: hidden; }
+  .about-graphics { left: 0; top: 0; width: 36.19%; height: 38.78%; }       /* ロゴABOUT＋詳しく見るボタン（画像） */
+  /* ↓ Figmaで文字レイヤーのものをHTMLテキスト化（無限に鮮明） */
+  .about-kaisha { left: 13.2%; top: 4.6%;  font-weight: 700; color: #212228; font-size: 1.39vw; line-height: 1; white-space: nowrap; }
+  .about-desc   { left: 3.48%; top: 9.6%;  width: 31.5%; font-weight: 700; color: #212228; font-size: 1.27vw; line-height: 2.094; }
+  .about-hero { left: 36.4269%; top: 0.8977%; width: 60.6729%; height: 42.0108%; }
+  .about-card1 { left: 2.6682%;  top: 43.6266%; width: 29.6991%; height: 23.5189%; }
+  .about-card2 { left: 34.1067%; top: 43.6266%; width: 27.3782%; height: 23.5189%; }
+  .about-card3 { left: 62.9930%; top: 43.6266%; width: 34.1067%; height: 23.5189%; cursor: pointer; }
+  .about-card3:hover img { filter: brightness(1.05); }
+
+  /* スクロールで画面に入ったらフェードイン（フェードアウトなし） */
+  .reveal { opacity: 0; transition: opacity .9s ease, transform .9s cubic-bezier(.22,.61,.36,1); }
+  .reveal--left { transform: translateX(-60px); }
+  .reveal--up   { transform: translateY(48px); }
+  .reveal.is-visible { opacity: 1; transform: translate(0, 0); }
+  .about-card2.reveal { transition-delay: .15s; }
+  .about-card3.reveal { transition-delay: .30s; }
+
+  /* ============ INTERVIEW（高解像度 1573px）============ */
+  .interview { aspect-ratio: 862 / 548; overflow: hidden; }
+  /* 4区分カード：右からフェードイン */
+  .iv-card1 { left: 16.820%; top: 1.277%; width: 18.677%; height: 27.190%; }
+  .iv-card2 { left: 37.007%; top: 1.277%; width: 18.677%; height: 27.190%; }
+  .iv-card3 { left: 57.193%; top: 1.277%; width: 18.677%; height: 27.190%; }
+  .iv-card4 { left: 77.378%; top: 1.277%; width: 18.677%; height: 27.190%; }
+  /* クロストーク：下からフェードイン */
+  .iv-crosstalk { left: 2.900%; top: 30.292%; width: 93.967%; height: 25.365%; }
+
+  .reveal--right { transform: translateX(60px); }   /* 右からフェードイン */
+  .iv-card2.reveal { transition-delay: .12s; }
+  .iv-card3.reveal { transition-delay: .24s; }
+  .iv-card4.reveal { transition-delay: .36s; }
+
+  /* ボタン上のテキスト（Figmaの文字レイヤー）をHTML文字で */
+  .iv-yattemiru { left: 65.55%; top: 66.0%; color: #212228; font-weight: 700; font-size: 1.39vw; white-space: nowrap; } /* やってみる！ */
+  .iv-crosstalk .iv-mitemiru { position: absolute; left: 5.45%; top: 75.5%; color: #fff; font-weight: 700; font-size: 1.39vw; white-space: nowrap; } /* 見てみる！ */
+</style>
+</head>
+<body>
+
+  <!-- ===== サイト共通ヘッダー（ナビ） ===== -->
+  <header class="site-header">
+    <img src="images/header-nav.png" alt="大成技研 TAISEI GIKEN">
+    <a class="nav-logo"      href="index.html"           aria-label="ホーム"></a>
+    <a class="nav-shiru"     href="index.html#about"     aria-label="会社を知る"></a>
+    <a class="nav-interview" href="index.html#interview" aria-label="インタビュー"></a>
+    <a class="nav-rinen"     href="kigyo-rinen.html"     aria-label="企業理念"></a>
+    <a class="nav-shindan"   href="index.html#interview" aria-label="適職診断"></a>
+  </header>
+
+  <!-- ===== ヒーローセクション ===== -->
+  <section class="sec hero">
+    <div class="layer person person--left"><img src="images/full-left.png" alt="左男性"></div>
+    <div class="layer person person--center"><img src="images/full-center.png" alt="真ん中女性"></div>
+    <div class="layer person person--right"><img src="images/full-right.png" alt="右男性"></div>
+    <div class="layer heading"><img src="images/layer-heading.png" alt="技術で、社会の未来を動かす。挑戦が、成長をつくる。"></div>
+    <div class="layer btn--shinsotsu"><img src="images/layer-btn-shinsotsu.png" alt="新卒エントリー"></div>
+    <div class="layer btn--chuto"><img src="images/layer-btn-chuto.png" alt="中途エントリー"></div>
+    <div class="layer btn--internship"><img src="images/layer-btn-internship.png" alt="インターンシップ"></div>
+  </section>
+
+  <!-- ===== ABOUT's（高解像度）===== -->
+  <section class="sec about" id="about">
+    <img class="sec-bg" src="images/about-bg-hd.png" alt="">
+    <div class="layer about-graphics"><img src="images/about-graphics.png" alt="ABOUT / 詳しく見る"></div>
+    <div class="layer about-kaisha">会社を知る</div>
+    <div class="layer about-desc">私たちは機械、電気、電子の技術力で、<br>自動車・航空宇宙・半導体・建設などの分野における設計開発を支えるエンジニアリング企業です。<br>確かな技術と挑戦する文化で、<br>社会に新たな価値を生み出し続けています。</div>
+    <div class="layer about-hero reveal reveal--left"><img src="images/about-hero-hd.png" alt="ABOUTヒーロー写真"></div>
+    <div class="layer about-card1 reveal reveal--up"><img src="images/about-card1-hd.png" alt="会社を知る"></div>
+    <div class="layer about-card2 reveal reveal--up"><img src="images/about-card2-hd.png" alt="数字で見る"></div>
+    <a class="layer about-card3 reveal reveal--up" href="a-labo.html" aria-label="A-LABOとは？ 詳しく見る"><img src="images/about-card3.svg" alt="A-LABOとは？"></a>
+  </section>
+
+  <!-- ===== INTERVIEW（高解像度）===== -->
+  <section class="sec interview" id="interview">
+    <img class="sec-bg" src="images/interview-bg-hd.png" alt="">
+    <!-- 4区分カード：右からフェードイン -->
+    <div class="layer iv-card1 reveal reveal--right"><img src="images/iv-card1.png" alt="人に密着"></div>
+    <div class="layer iv-card2 reveal reveal--right"><img src="images/iv-card2.png" alt="力を発揮"></div>
+    <div class="layer iv-card3 reveal reveal--right"><img src="images/iv-card3.png" alt="人と約束"></div>
+    <div class="layer iv-card4 reveal reveal--right"><img src="images/iv-card4.png" alt="人が財産"></div>
+    <!-- クロストーク：下からフェードイン -->
+    <div class="layer iv-crosstalk reveal reveal--up">
+      <img src="images/iv-crosstalk.png" alt="クロストーク">
+      <span class="iv-mitemiru">見てみる！</span>
+    </div>
+    <div class="layer iv-yattemiru">やってみる！</div>
+  </section>
+
+  <!-- ===== NEED / ENTRY（高解像度）===== -->
+  <img class="sec sec--img" src="images/need.png" alt="NEED">
+
+  <script>
+    const io = new IntersectionObserver((entries) => {
+      for (const e of entries) {
+        if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); }
+      }
+    }, { threshold: 0.25 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  </script>
+</body>
+</html>
