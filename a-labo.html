@@ -16,9 +16,10 @@
   .sec { position: relative; width: 100%; display: block; }
   .sec--img { display: block; width: 100%; height: auto; }
 
-  /* ===== サイト共通ヘッダー（ナビ） ===== */
-  .site-header { position: relative; width: 100%; line-height: 0; }
-  .site-header > img { display: block; width: 100%; height: auto; }
+  /* ===== サイト共通ヘッダー（ナビ・スリム / 追従なし） ===== */
+  .site-header { position: relative; width: 100%; background: #ffffff; line-height: 0; text-align: center; }
+  .site-header__inner { position: relative; display: inline-block; vertical-align: top; }
+  .site-header__inner > img { display: block; height: clamp(54px, 5vw, 92px); width: auto; }
   .site-header a { position: absolute; top: 0; height: 100%; display: block; }
   .site-header .nav-logo      { left: 0;      width: 24.00%; }
   .site-header .nav-shiru     { left: 23.96%; width: 10.49%; }
@@ -39,12 +40,14 @@
 <body>
   <!-- ===== サイト共通ヘッダー（ナビ） ===== -->
   <header class="site-header">
-    <img src="images/header-nav.png" alt="大成技研 TAISEI GIKEN">
-    <a class="nav-logo"      href="index.html"           aria-label="ホーム"></a>
-    <a class="nav-shiru"     href="index.html#about"     aria-label="会社を知る"></a>
-    <a class="nav-interview" href="index.html#interview" aria-label="インタビュー"></a>
-    <a class="nav-rinen"     href="kigyo-rinen.html"     aria-label="企業理念"></a>
-    <a class="nav-shindan"   href="index.html#interview" aria-label="適職診断"></a>
+    <div class="site-header__inner">
+      <img src="images/header-nav.png" alt="大成技研 TAISEI GIKEN">
+      <a class="nav-logo"      href="index.html"           aria-label="ホーム"></a>
+      <a class="nav-shiru"     href="index.html#about"     aria-label="会社を知る"></a>
+      <a class="nav-interview" href="index.html#interview" aria-label="インタビュー"></a>
+      <a class="nav-rinen"     href="kigyo-rinen.html"     aria-label="企業理念"></a>
+      <a class="nav-shindan"   href="index.html#interview" aria-label="適職診断"></a>
+    </div>
   </header>
 
   <!-- 上部：A-LABOとは？ ヒーロー（パンくずHOMEからホームへ戻る） -->
